@@ -1,0 +1,22 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.pub-cache/
+.pub/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Plataformas (se regeneran con flutter create)
+android/app/debug
+android/app/profile
+android/app/release
+
+# Sistema
+.DS_Store
+Thumbs.db
