@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Estructura de carpetas
 
 ```
@@ -90,8 +89,3 @@ PR. Al aceptarlo, se integra a `MASTER`.
 git checkout MASTER
 git pull origin MASTER
 ```
-Así tu rama local queda al día con lo que ya integraron los demás.
-=======
-# PurisimoCafe-AppMovil
-En este repositorio estaremos trabajando nuestra aplicación móvil 
->>>>>>> 70f2a218a4f37f2c1d51f126a9110b7e1629baf7
