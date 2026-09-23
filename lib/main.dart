@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants/app_colors.dart';
-import 'screens/welcome_screen/welcome_screen.dart';
+import 'screens/login_screen/login_screen.dart';
 
 void main() {
   runApp(const PurisimoCafeApp());
@@ -29,7 +29,7 @@ class PurisimoCafeApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: const WelcomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }
