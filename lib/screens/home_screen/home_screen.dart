@@ -1,47 +1,110 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
+import '../../widgets/badge_estado.dart';
+import '../historial_screen/historial_screen.dart';
+import '../inventario_screen/inventario_screen.dart';
 import '../login_screen/login_screen.dart';
+import '../metricas_usuario_screen/metricas_usuario_screen.dart';
+import '../movimiento_inventario_screen/movimiento_inventario_screen.dart';
+import '../perfil_screen/perfil_screen.dart';
+import '../preferencias_usuario_screen/preferencias_usuario_screen.dart';
 import '../productos_screen/productos_screen.dart';
+import '../reportes_screen/reportes_screen.dart';
+import '../usuarios_screen/usuarios_screen.dart';
 
-/// Pantalla mostrada después de iniciar sesión.
-///
-/// Recibe el nombre y el rol del usuario directamente como
-/// parámetros del constructor (sin librerías de manejo de estado,
-/// para mantener el proyecto simple). El menú de opciones cambia
-/// según el rol, cumpliendo la restricción de permisos por usuario.
 class HomeScreen extends StatelessWidget {
   final String nombreUsuario;
+  final String email;
   final String rol;
 
   const HomeScreen({
     super.key,
     required this.nombreUsuario,
+    required this.email,
     required this.rol,
   });
 
-  List<(IconData, String)> get _opciones {
-    final comunes = <(IconData, String)>[
-      (Icons.coffee_rounded, 'Catálogo'),
-    ];
+  // Abre otra pantalla
+  void _ir(BuildContext context, Widget pantalla) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => pantalla));
+  }
 
-    if (rol == 'Administrador') {
-      return [
-        ...comunes,
-        (Icons.inventory_2_outlined, 'Inventario'),
-        (Icons.people_outline, 'Usuarios'),
-        (Icons.bar_chart_rounded, 'Reportes'),
-      ];
-    }
-
-    // Cajero: opciones más acotadas.
+  // Botones que ve el Administrador
+  List<Widget> _botonesAdmin(BuildContext context) {
     return [
-      ...comunes,
-      (Icons.point_of_sale_outlined, 'Ventas'),
+      _OpcionCard(
+          icon: Icons.coffee_rounded,
+          label: 'Catálogo',
+          onTap: () => _ir(context, const ProductosScreen())),
+      _OpcionCard(
+          icon: Icons.receipt_long,
+          label: 'Historial',
+          onTap: () => _ir(context, const HistorialScreen())),
+      _OpcionCard(
+          icon: Icons.inventory_2_outlined,
+          label: 'Inventario',
+          onTap: () => _ir(context, const InventarioScreen())),
+      _OpcionCard(
+          icon: Icons.delete_sweep_outlined,
+          label: 'Mermas',
+          onTap: () => _ir(context, const MovimientoInventarioScreen())),
+      _OpcionCard(
+          icon: Icons.people_outline,
+          label: 'Usuarios',
+          onTap: () => _ir(context, const UsuariosScreen())),
+      _OpcionCard(
+          icon: Icons.bar_chart_rounded,
+          label: 'Reportes',
+          onTap: () => _ir(context, const ReportesScreen())),
+      _OpcionCard(
+          icon: Icons.query_stats_rounded,
+          label: 'Métricas de usuario',
+          onTap: () => _ir(context, const MetricasUsuarioScreen())),
+      _OpcionCard(
+          icon: Icons.tune_rounded,
+          label: 'Preferencias',
+          onTap: () => _ir(context, const PreferenciasUsuarioScreen())),
+      _OpcionCard(
+          icon: Icons.person_outline,
+          label: 'Mi perfil',
+          onTap: () => _ir(context,
+              PerfilScreen(nombre: nombreUsuario, email: email, rol: rol))),
+    ];
+  }
+
+  // Botones que ve el Cajero
+  List<Widget> _botonesCajero(BuildContext context) {
+    return [
+      _OpcionCard(
+          icon: Icons.coffee_rounded,
+          label: 'Catálogo',
+          onTap: () => _ir(context, const ProductosScreen())),
+      _OpcionCard(
+          icon: Icons.receipt_long,
+          label: 'Historial',
+          onTap: () => _ir(context, const HistorialScreen())),
+      _OpcionCard(
+          icon: Icons.inventory_2_outlined,
+          label: 'Inventario',
+          onTap: () => _ir(context, const InventarioScreen())),
+      _OpcionCard(
+          icon: Icons.person_outline,
+          label: 'Mi perfil',
+          onTap: () => _ir(context,
+              PerfilScreen(nombre: nombreUsuario, email: email, rol: rol))),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    // Según el rol mostramos unos botones u otros
+    List<Widget> botones;
+    if (rol == 'Administrador') {
+      botones = _botonesAdmin(context);
+    } else {
+      botones = _botonesCajero(context);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Purísimo Café'),
@@ -50,8 +113,9 @@ class HomeScreen extends StatelessWidget {
             tooltip: 'Cerrar sesión',
             icon: const Icon(Icons.logout),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
               );
             },
           ),
@@ -65,21 +129,7 @@ class HomeScreen extends StatelessWidget {
             Text('Hola, $nombreUsuario',
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.cafeGold.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                rol,
-                style: const TextStyle(
-                  color: AppColors.cafeBrown,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
-              ),
-            ),
+            BadgeEstado(texto: rol, color: AppColors.secondary),
             const SizedBox(height: 32),
             Text('Opciones disponibles',
                 style: Theme.of(context).textTheme.titleMedium),
@@ -89,21 +139,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                children: _opciones.map((op) {
-                  final icon = op.$1;
-                  final label = op.$2;
-                  return _OpcionCard(
-                    icon: icon,
-                    label: label,
-                    onTap: label == 'Catálogo'
-                        ? () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const ProductosScreen(),
-                              ),
-                            )
-                        : null,
-                  );
-                }).toList(),
+                children: botones,
               ),
             ),
           ],
@@ -113,33 +149,28 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/// Tarjeta de opción del menú. Es privada porque solo la usa esta
-/// pantalla; si otra pantalla llegara a necesitarla, se movería a
-/// `lib/widgets/` como widget compartido.
+// Cuadro con icono y nombre para cada opción del menú
 class _OpcionCard extends StatelessWidget {
   final IconData icon;
   final String label;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
-  const _OpcionCard({required this.icon, required this.label, this.onTap});
+  const _OpcionCard(
+      {required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
+      elevation: 0,
       child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: onTap ??
-            () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('$label: próximamente')),
-              );
-            },
+        onTap: onTap,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 32, color: AppColors.cafeBrown),
+            Icon(icon, size: 32, color: AppColors.primary),
             const SizedBox(height: 8),
-            Text(label, style: Theme.of(context).textTheme.bodyMedium),
+            Text(label, style: const TextStyle(color: AppColors.gray900)),
           ],
         ),
       ),
