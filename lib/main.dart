@@ -16,17 +16,18 @@ class PurisimoCafeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: AppColors.cafePale,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.cafeGold,
-          primary: AppColors.cafeGold,
-          secondary: AppColors.cafeBrown,
-        ),
+        scaffoldBackgroundColor: AppColors.gray200,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.cafeBrown,
+          backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           centerTitle: true,
-          elevation: 0,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
+          ),
         ),
       ),
       home: const LoginScreen(),

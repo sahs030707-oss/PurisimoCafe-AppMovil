@@ -89,3 +89,4 @@ PR. Al aceptarlo, se integra a `MASTER`.
 git checkout MASTER
 git pull origin MASTER
 ```
+Así tu rama local queda al día con lo que ya integraron los demás.
