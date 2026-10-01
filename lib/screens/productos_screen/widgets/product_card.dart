@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../constants/app_colors.dart';
 import '../../../models/producto.dart';
 
-/// Tarjeta reutilizable para mostrar un producto en la grilla del
-/// catálogo.
 class ProductCard extends StatelessWidget {
   final Producto product;
   final VoidCallback? onTap;
@@ -29,12 +27,12 @@ class ProductCard extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: AppColors.cafeCream,
+                        color: AppColors.caramel,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Icon(
                         Icons.local_cafe_outlined,
-                        color: AppColors.cafeBrown,
+                        color: AppColors.primary,
                       ),
                     ),
                     const Spacer(),
@@ -45,7 +43,7 @@ class ProductCard extends StatelessWidget {
                           vertical: 3,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.danger.withValues(alpha: 0.10),
+                          color: AppColors.warning.withValues(alpha: 0.10),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Text(
@@ -53,7 +51,7 @@ class ProductCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.danger,
+                            color: AppColors.warning,
                           ),
                         ),
                       ),
@@ -73,7 +71,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   'C\$ ${product.precio.toStringAsFixed(0)}',
                   style: const TextStyle(
-                    color: AppColors.cafeGold,
+                    color: AppColors.secondary,
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                   ),

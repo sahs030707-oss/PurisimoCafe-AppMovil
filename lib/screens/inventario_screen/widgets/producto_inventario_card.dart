@@ -5,18 +5,11 @@ import '../../../utils/formato.dart';
 import '../../../widgets/badge_estado.dart';
 import '../../../widgets/tarjeta_item.dart';
 
-// Tarjeta de un producto en el inventario, con botones de editar y eliminar
+// Tarjeta de un producto en el inventario
 class ProductoInventarioCard extends StatelessWidget {
   final Producto producto;
-  final VoidCallback onEditar;
-  final VoidCallback onEliminar;
 
-  const ProductoInventarioCard({
-    super.key,
-    required this.producto,
-    required this.onEditar,
-    required this.onEliminar,
-  });
+  const ProductoInventarioCard({super.key, required this.producto});
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +29,6 @@ class ProductoInventarioCard extends StatelessWidget {
       titulo: producto.nombre,
       subtitulo: '${cordobas(producto.precio)} · ${producto.categoria}',
       extra: BadgeEstado(texto: texto, color: color),
-      derecha: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            onPressed: onEditar,
-            icon: const Icon(Icons.edit_outlined, color: AppColors.gray700),
-          ),
-          IconButton(
-            onPressed: onEliminar,
-            icon: const Icon(Icons.delete_outline, color: AppColors.error),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -7,7 +7,6 @@ import '../login_screen/login_screen.dart';
 import '../metricas_usuario_screen/metricas_usuario_screen.dart';
 import '../movimiento_inventario_screen/movimiento_inventario_screen.dart';
 import '../perfil_screen/perfil_screen.dart';
-import '../preferencias_usuario_screen/preferencias_usuario_screen.dart';
 import '../productos_screen/productos_screen.dart';
 import '../reportes_screen/reportes_screen.dart';
 import '../usuarios_screen/usuarios_screen.dart';
@@ -60,10 +59,6 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.query_stats_rounded,
           label: 'Métricas de usuario',
           onTap: () => _ir(context, const MetricasUsuarioScreen())),
-      _OpcionCard(
-          icon: Icons.tune_rounded,
-          label: 'Preferencias',
-          onTap: () => _ir(context, const PreferenciasUsuarioScreen())),
       _OpcionCard(
           icon: Icons.person_outline,
           label: 'Mi perfil',
