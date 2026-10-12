@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/datos_simulados.dart';
+import '../../mock_data/datos_simulados.dart';
 import '../../models/producto.dart';
 import '../../utils/formato.dart';
 import '../../widgets/encabezado_filtros.dart';

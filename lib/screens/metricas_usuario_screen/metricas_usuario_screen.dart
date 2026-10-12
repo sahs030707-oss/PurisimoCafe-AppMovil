@@ -1,4 +1,3 @@
-// Responsable: MABELIN (sube 4ta)
 import 'package:flutter/material.dart';
 import 'widgets/tarjeta_metricas.dart';
 
@@ -12,12 +11,28 @@ class MetricasUsuarioScreen extends StatefulWidget {
 class _MetricasUsuarioScreenState extends State<MetricasUsuarioScreen> {
   String _abierto = 'Daniela'; // nombre del usuario que está desplegado
 
-  // Datos de prueba de cada usuario (los 4 valores van en el mismo orden de los títulos)
+  // Datos de prueba de cada usuario
   final List<Map<String, dynamic>> _usuarios = [
-    {'nombre': 'Daniela', 'rol': 'Administrador', 'valores': ['18', '27', '12', 'C\$ 25,450']},
-    {'nombre': 'Steven', 'rol': 'Administrador', 'valores': ['15', '30', '8', 'C\$ 18,200']},
-    {'nombre': 'Mabelin', 'rol': 'Cajero', 'valores': ['187', 'C\$ 8,450', '214', '140 / 74']},
-    {'nombre': 'Yaoska', 'rol': 'Cajero', 'valores': ['120', 'C\$ 5,300', '150', '90 / 60']},
+    {
+      'nombre': 'Daniela',
+      'rol': 'Administrador',
+      'valores': ['18', '27', '12', 'C\$ 25,450']
+    },
+    {
+      'nombre': 'Steven',
+      'rol': 'Administrador',
+      'valores': ['15', '30', '8', 'C\$ 18,200']
+    },
+    {
+      'nombre': 'Mabelin',
+      'rol': 'Cajero',
+      'valores': ['187', 'C\$ 8,450', '214', '140 / 74']
+    },
+    {
+      'nombre': 'Yaoska',
+      'rol': 'Cajero',
+      'valores': ['120', 'C\$ 5,300', '150', '90 / 60']
+    },
   ];
 
   @override

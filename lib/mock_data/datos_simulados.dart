@@ -4,6 +4,8 @@ import '../models/producto.dart';
 import '../models/transaccion.dart';
 import '../models/usuario.dart';
 
+// Lista de datos simulados de todas las pantallas de la aplicación
+//productos
 final List<Producto> productos = [
   Producto(
       nombre: 'Café Frío',
@@ -55,6 +57,7 @@ final List<Producto> productos = [
       stock: 0),
 ];
 
+//ventas y compras (Historial de transacciones)
 final List<Transaccion> ventas = [
   Transaccion(
       codigo: 'Venta #001',
@@ -96,6 +99,7 @@ final List<Transaccion> compras = [
       total: 180),
 ];
 
+//movimientos de inventario o mermas
 final List<Movimiento> movimientos = [
   Movimiento(
       producto: 'Leche', cantidad: 4, motivo: 'Caducado', fecha: '22/09/2026'),
@@ -116,6 +120,7 @@ final List<Movimiento> movimientos = [
       fecha: '26/09/2026'),
 ];
 
+//usuarios
 final List<Usuario> usuarios = [
   Usuario(
       nombre: 'Diana García',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
-import '../../data/datos_simulados.dart';
+import '../../mock_data/datos_simulados.dart';
 import '../../models/movimiento.dart';
 import '../../widgets/encabezado_filtros.dart';
 import 'widgets/formulario_merma.dart';
@@ -41,7 +41,7 @@ class _MovimientoInventarioScreenState
     );
     if (nueva != null) {
       setState(() {
-        _lista.insert(0, nueva); // la ponemos de primera
+        _lista.insert(0, nueva);
       });
     }
   }

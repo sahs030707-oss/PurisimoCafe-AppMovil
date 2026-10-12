@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/datos_simulados.dart';
+import '../../mock_data/datos_simulados.dart';
 import '../../models/transaccion.dart';
 import '../../widgets/selector_segmentos.dart';
 import 'widgets/tarjeta_transaccion.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../data/datos_simulados.dart';
+import '../../../mock_data/datos_simulados.dart';
 import '../../../models/movimiento.dart';
 import '../../../models/producto.dart';
 import '../../../widgets/chips_filtro.dart';

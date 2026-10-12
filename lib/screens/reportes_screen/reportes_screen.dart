@@ -1,7 +1,6 @@
-// Responsable: DANIELA (sube 2da)
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
-import '../../data/datos_simulados.dart';
+import '../../mock_data/datos_simulados.dart';
 import '../../models/producto.dart';
 import '../../utils/formato.dart';
 import '../../widgets/selector_segmentos.dart';
@@ -55,7 +54,8 @@ class _ReportesScreenState extends State<ReportesScreen> {
       }
     }
     for (String etiqueta in datos.keys) {
-      barras.add(BarraGrafica(etiqueta: etiqueta, valor: datos[etiqueta]!, maximo: maximo));
+      barras.add(BarraGrafica(
+          etiqueta: etiqueta, valor: datos[etiqueta]!, maximo: maximo));
     }
 
     return Scaffold(
@@ -109,7 +109,10 @@ class _ReportesScreenState extends State<ReportesScreen> {
           const SizedBox(height: 24),
           const Text(
             'Ventas por periodo',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.gray900),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: AppColors.gray900),
           ),
           const SizedBox(height: 12),
           SelectorSegmentos(
