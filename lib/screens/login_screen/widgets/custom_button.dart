@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// Botón reutilizable con estado de carga integrado.
-///
 /// Por ahora solo lo usa Login. Si otra pantalla llega a
-/// necesitarlo, se mueve a `lib/widgets/` (ver README).
+/// necesitarlo, se mueve a `lib/widgets/`.
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -24,7 +22,8 @@ class CustomButton extends StatelessWidget {
         ? const SizedBox(
             height: 18,
             width: 18,
-            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+            child:
+                CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
           )
         : Text(text);
 
