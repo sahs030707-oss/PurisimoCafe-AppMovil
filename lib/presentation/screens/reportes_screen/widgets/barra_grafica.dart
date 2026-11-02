@@ -27,7 +27,7 @@ class BarraGrafica extends StatelessWidget {
               value: valor / maximo,
               minHeight: 14,
               color: AppColors.primary,
-              backgroundColor: AppColors.gray200,
+              backgroundColor: AppTema.fondoSuave(context),
             ),
           ),
           SizedBox(
@@ -35,8 +35,8 @@ class BarraGrafica extends StatelessWidget {
             child: Text(
               cordobas(valor),
               textAlign: TextAlign.right,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: AppColors.gray900),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: AppTema.texto(context)),
             ),
           ),
         ],

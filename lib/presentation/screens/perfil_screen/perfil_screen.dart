@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/di/injection.dart';
+import '../../../services/authentication_service.dart';
+import '../../providers/tema_provider.dart';
 import '../../widgets/dialogo_confirmar.dart';
 import '../login_screen/login_screen.dart';
 import 'widgets/avatar_perfil.dart';
-import 'widgets/campo_perfil.dart';
 import 'widgets/opcion_perfil.dart';
-import '../../../core/di/injection.dart';
-import '../../../services/authentication_service.dart';
 
-class PerfilScreen extends StatefulWidget {
+class PerfilScreen extends StatelessWidget {
   final String nombre;
   final String email;
   final String rol;
@@ -20,38 +21,13 @@ class PerfilScreen extends StatefulWidget {
     required this.rol,
   });
 
-  @override
-  State<PerfilScreen> createState() => _PerfilScreenState();
-}
-
-class _PerfilScreenState extends State<PerfilScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _nombreController = TextEditingController();
-  bool _modoOscuro = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Los campos empiezan con los datos del usuario que inició sesión
-    _usernameController.text = widget.email.split('@')[0];
-    _nombreController.text = widget.nombre;
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _nombreController.dispose();
-    super.dispose();
-  }
-
-  void _mostrarMensaje(String texto) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(texto)));
-  }
-
-  void _cerrarSesion() async {
+  void _cerrarSesion(BuildContext context) async {
     bool si = await confirmar(context, '¿Deseas cerrar sesión?');
-    if (si && mounted) {
+
+    if (si && context.mounted) {
+      // Borramos el token de la sesión
       sl<AuthenticationService>().cerrarSesion();
+
       // Volvemos al login y borramos las pantallas anteriores
       Navigator.pushAndRemoveUntil(
         context,
@@ -62,7 +38,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
   }
 
   // Título pequeño de cada sección
-  Widget _titulo(String texto) {
+  Widget _titulo(BuildContext context, String texto) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 8),
       child: Text(
@@ -70,7 +46,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: _modoOscuro ? AppColors.caramel : AppColors.gray700,
+          color: AppTema.textoSuave(context),
         ),
       ),
     );
@@ -78,98 +54,50 @@ class _PerfilScreenState extends State<PerfilScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Colores que cambian con el modo oscuro
-    Color fondo = AppColors.gray200;
-    Color colorTexto = AppColors.gray900;
-    if (_modoOscuro) {
-      fondo = const Color(0xFF1E1E1E);
-      colorTexto = Colors.white;
-    }
+    final tema = context.watch<TemaProvider>();
 
     return Scaffold(
-      backgroundColor: fondo,
       appBar: AppBar(title: const Text('Perfil')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Center(
-            child: AvatarPerfil(
-              nombre: widget.nombre,
-              rol: widget.rol,
-              oscuro: _modoOscuro,
-            ),
-          ),
+          Center(child: AvatarPerfil(nombre: nombre, rol: rol)),
 
           // Datos personales
-          _titulo('DATOS PERSONALES'),
-          CampoPerfil(
-            label: 'Nombre de usuario',
-            controller: _usernameController,
-            oscuro: _modoOscuro,
-          ),
-          const SizedBox(height: 8),
-          CampoPerfil(
-            label: 'Nombre completo',
-            controller: _nombreController,
-            oscuro: _modoOscuro,
-          ),
-          const SizedBox(height: 8),
-          OpcionPerfil(
-            icono: Icons.email_outlined,
-            texto: widget.email,
-            oscuro: _modoOscuro,
-          ),
-          OpcionPerfil(
+          _titulo(context, 'DATOS PERSONALES'),
+          OpcionPerfil(icono: Icons.email_outlined, texto: email),
+          const OpcionPerfil(
             icono: Icons.store_outlined,
             texto: 'Sucursal Masatepe',
-            oscuro: _modoOscuro,
-          ),
-
-          // Seguridad
-          _titulo('SEGURIDAD'),
-          OpcionPerfil(
-            icono: Icons.lock_outline,
-            texto: 'Cambiar contraseña',
-            oscuro: _modoOscuro,
-            onTap: () => _mostrarMensaje('Cambiar contraseña: próximamente'),
           ),
 
           // Apariencia
-          _titulo('APARIENCIA'),
+          _titulo(context, 'APARIENCIA'),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             secondary: Icon(
-              _modoOscuro
+              tema.modoOscuro
                   ? Icons.dark_mode_outlined
                   : Icons.light_mode_outlined,
-              color: colorTexto,
+              color: AppTema.texto(context),
             ),
-            title: Text('Modo oscuro', style: TextStyle(color: colorTexto)),
+            title: Text(
+              'Modo oscuro',
+              style: TextStyle(color: AppTema.texto(context)),
+            ),
             activeTrackColor: AppColors.primary,
-            value: _modoOscuro,
+            value: tema.modoOscuro,
             onChanged: (valor) {
-              setState(() {
-                _modoOscuro = valor;
-              });
+              tema.cambiar(valor);
             },
           ),
 
           const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            height: 45,
-            child: ElevatedButton(
-              onPressed: () => _mostrarMensaje('Cambios guardados con éxito'),
-              child: const Text('Guardar cambios'),
-            ),
-          ),
-          const SizedBox(height: 8),
           OpcionPerfil(
             icono: Icons.logout,
             texto: 'Cerrar sesión',
             esPeligro: true,
-            oscuro: _modoOscuro,
-            onTap: _cerrarSesion,
+            onTap: () => _cerrarSesion(context),
           ),
         ],
       ),

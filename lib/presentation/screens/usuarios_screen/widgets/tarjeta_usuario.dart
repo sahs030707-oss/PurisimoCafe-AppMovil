@@ -14,7 +14,7 @@ class TarjetaUsuario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color colorRol = AppColors.gray700;
+    Color colorRol = AppTema.textoSuave(context);
     if (usuario.rol == 'Administrador') {
       colorRol = AppColors.secondary;
     }

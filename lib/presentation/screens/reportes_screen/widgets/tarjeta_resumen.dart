@@ -19,7 +19,7 @@ class TarjetaResumen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: AppTema.tarjeta(context),
       elevation: 0,
       margin: EdgeInsets.zero,
       child: Padding(
@@ -30,13 +30,14 @@ class TarjetaResumen extends StatelessWidget {
             Icon(icono, color: color),
             const SizedBox(height: 8),
             Text(titulo,
-                style: const TextStyle(fontSize: 12, color: AppColors.gray700)),
+                style: TextStyle(
+                    fontSize: 12, color: AppTema.textoSuave(context))),
             Text(
               valor,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.gray900),
+                  color: AppTema.texto(context)),
             ),
           ],
         ),

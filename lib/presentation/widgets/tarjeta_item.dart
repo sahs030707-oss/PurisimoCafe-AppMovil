@@ -24,7 +24,7 @@ class TarjetaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> textos = [
       Text(subtitulo,
-          style: const TextStyle(fontSize: 12, color: AppColors.gray700)),
+          style: TextStyle(fontSize: 12, color: AppTema.textoSuave(context)))
     ];
     if (extra != null) {
       textos.add(const SizedBox(height: 4));
@@ -32,7 +32,7 @@ class TarjetaItem extends StatelessWidget {
     }
 
     return Card(
-      color: Colors.white,
+      color: AppTema.tarjeta(context),
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
@@ -47,8 +47,8 @@ class TarjetaItem extends StatelessWidget {
         ),
         title: Text(
           titulo,
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, color: AppColors.gray900),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: AppTema.texto(context)),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

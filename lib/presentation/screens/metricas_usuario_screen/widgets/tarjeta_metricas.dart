@@ -45,14 +45,15 @@ class TarjetaMetricas extends StatelessWidget {
       cuadros.add(Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppTema.tarjeta(context),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(titulos[i],
-                style: const TextStyle(fontSize: 11, color: AppColors.gray700),
+                style:
+                    TextStyle(fontSize: 11, color: AppTema.textoSuave(context)),
                 textAlign: TextAlign.center),
             const SizedBox(height: 4),
             Text(valores[i],
@@ -66,7 +67,7 @@ class TarjetaMetricas extends StatelessWidget {
     }
 
     return Card(
-      color: Colors.white,
+      color: AppTema.tarjeta(context),
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 12),
       child: Column(
@@ -86,7 +87,7 @@ class TarjetaMetricas extends StatelessWidget {
           ),
           if (abierta)
             Container(
-              color: AppColors.gray200.withValues(alpha: 0.3),
+              color: AppTema.fondoSuave(context).withValues(alpha: 0.3),
               padding: const EdgeInsets.all(12),
               child: GridView.count(
                 shrinkWrap: true,

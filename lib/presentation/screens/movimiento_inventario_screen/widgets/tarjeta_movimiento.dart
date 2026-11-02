@@ -13,7 +13,7 @@ class TarjetaMovimiento extends StatelessWidget {
   Widget build(BuildContext context) {
     // Icono y color según el motivo
     IconData icono = Icons.search_off;
-    Color color = AppColors.gray700;
+    Color color = AppTema.textoSuave(context);
     if (movimiento.motivo == 'Dañado') {
       icono = Icons.report_problem_outlined;
       color = AppColors.warning;

@@ -73,12 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Icon(Icons.local_cafe_rounded,
                     size: 56, color: AppColors.primary),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   'Purísimo Café',
                   style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.gray900),
+                      color: AppTema.texto(context)),
                 ),
                 const SizedBox(height: 4),
                 const Text('Inicia sesión para continuar'),

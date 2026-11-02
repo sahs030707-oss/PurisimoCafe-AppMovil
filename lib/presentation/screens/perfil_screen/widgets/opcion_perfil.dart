@@ -7,7 +7,6 @@ class OpcionPerfil extends StatelessWidget {
   final String texto;
   final VoidCallback? onTap;
   final bool esPeligro; // true = se muestra en rojo
-  final bool oscuro; // true = modo oscuro activado
 
   const OpcionPerfil({
     super.key,
@@ -15,23 +14,17 @@ class OpcionPerfil extends StatelessWidget {
     required this.texto,
     this.onTap,
     this.esPeligro = false,
-    this.oscuro = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    Color color = AppColors.gray900;
-    Color fondo = Colors.white;
-    if (oscuro) {
-      color = Colors.white;
-      fondo = const Color(0xFF2A2A2A);
-    }
+    Color color = AppTema.texto(context);
     if (esPeligro) {
       color = AppColors.error;
     }
 
     return Card(
-      color: fondo,
+      color: AppTema.tarjeta(context),
       elevation: 0,
       child: ListTile(
         onTap: onTap,
