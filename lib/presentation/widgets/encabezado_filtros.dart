@@ -1,7 +1,7 @@
-// Responsable: MABELIN (sube 4ta)
 import 'package:flutter/material.dart';
 import 'barra_busqueda.dart';
 import 'chips_filtro.dart';
+import '../../core/constants/app_colors.dart';
 
 // Parte de arriba de varias pantallas: barra de búsqueda + filtros
 class EncabezadoFiltros extends StatelessWidget {
@@ -23,7 +23,7 @@ class EncabezadoFiltros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: AppTema.tarjeta(context),
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [

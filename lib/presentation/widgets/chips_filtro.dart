@@ -26,8 +26,8 @@ class ChipsFiltro extends StatelessWidget {
           selected: activo,
           showCheckmark: false,
           selectedColor: AppColors.primary,
-          labelStyle:
-              TextStyle(color: activo ? Colors.white : AppColors.gray700),
+          labelStyle: TextStyle(
+              color: activo ? Colors.white : AppTema.textoSuave(context)),
           onSelected: (_) => onChanged(op),
         ),
       ));

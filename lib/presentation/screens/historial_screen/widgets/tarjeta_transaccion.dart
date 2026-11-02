@@ -21,8 +21,8 @@ class TarjetaTransaccion extends StatelessWidget {
       subtitulo: '${transaccion.detalle}\n${transaccion.fecha}',
       derecha: Text(
         cordobas(transaccion.total),
-        style: const TextStyle(
-            fontWeight: FontWeight.bold, color: AppColors.gray900),
+        style: TextStyle(
+            fontWeight: FontWeight.bold, color: AppTema.texto(context)),
       ),
     );
   }

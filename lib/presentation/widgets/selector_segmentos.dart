@@ -33,7 +33,7 @@ class SelectorSegmentos extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: activo ? Colors.white : AppColors.gray700,
+                color: activo ? Colors.white : AppTema.textoSuave(context),
               ),
             ),
           ),
@@ -44,7 +44,7 @@ class SelectorSegmentos extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.gray200,
+        color: AppTema.fondoSuave(context),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(children: botones),

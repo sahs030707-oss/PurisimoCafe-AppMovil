@@ -125,10 +125,10 @@ class _ReportesScreenState extends State<ReportesScreen> {
         const SizedBox(height: 24),
         Text(
           tituloGrafica,
-          style: const TextStyle(
+          style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: AppColors.gray900),
+              color: AppTema.texto(context)),
         ),
         const SizedBox(height: 12),
         SelectorSegmentos(

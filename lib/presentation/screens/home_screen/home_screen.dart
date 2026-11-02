@@ -159,7 +159,7 @@ class _OpcionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: AppTema.tarjeta(context),
       elevation: 0,
       child: InkWell(
         onTap: onTap,
@@ -168,7 +168,7 @@ class _OpcionCard extends StatelessWidget {
           children: [
             Icon(icon, size: 32, color: AppColors.primary),
             const SizedBox(height: 8),
-            Text(label, style: const TextStyle(color: AppColors.gray900)),
+            Text(label, style: TextStyle(color: AppTema.texto(context))),
           ],
         ),
       ),

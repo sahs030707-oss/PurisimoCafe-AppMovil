@@ -16,7 +16,7 @@ class BarraBusqueda extends StatelessWidget {
         hintText: hint,
         prefixIcon: const Icon(Icons.search),
         filled: true,
-        fillColor: AppColors.gray200.withValues(alpha: 0.5),
+        fillColor: AppTema.fondoSuave(context).withValues(alpha: 0.5),
         contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

@@ -16,6 +16,8 @@ import '../../data/repositories/movimientos_repository.dart';
 import '../../presentation/providers/movimiento_provider.dart';
 import '../../services/movimiento_service.dart';
 import '../../services/reporte_service.dart';
+import '../../data/repositories/tema_repository.dart';
+import '../../presentation/providers/tema_provider.dart';
 
 // Contenedor de dependencias
 final sl = GetIt.instance;
@@ -52,4 +54,7 @@ void setupDependencies() {
   sl.registerLazySingleton<MovimientoProvider>(
       () => MovimientoProvider(sl<MovimientoService>()));
   sl.registerLazySingleton<ReporteService>(() => ReporteService());
+  sl.registerLazySingleton<TemaRepository>(() => TemaRepository());
+  sl.registerLazySingleton<TemaProvider>(
+      () => TemaProvider(sl<TemaRepository>()));
 }
